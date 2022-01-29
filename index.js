@@ -47,6 +47,9 @@ mongoose.connect(db, {
 const auth = require('./auth');
 app.use('/auth', auth);
 
+const admin = require('./admin');
+app.use('/admin', admin);
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })
