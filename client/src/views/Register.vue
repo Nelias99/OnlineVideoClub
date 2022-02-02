@@ -98,6 +98,8 @@ export default {
       this.register(user).then(res => {
         if (res.data.success) {
           this.$router.push("login");
+        }else {
+          this.$swal(res.data.msg);
         }
       });
     }

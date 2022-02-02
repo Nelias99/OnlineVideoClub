@@ -6,7 +6,8 @@ const state = {
     token: localStorage.getItem('token') || '',
     user: {},
     status: '',
-    error: null
+    error: null,
+    users:[]
 };
 
 const getters = {
@@ -14,7 +15,8 @@ const getters = {
     isLoggedIn: state => !!state.token,
     authState: state => state.status,
     user: state => state.user,
-    error: state => state.error
+    error: state => state.error,
+    users: state => state.users
 };
 
 const actions = {
@@ -55,6 +57,11 @@ const actions = {
             commit('register_error', err)
         }
     },
+    async getusers({commit}){
+        let res = await axios.get(serverAdress+'/admin/userlist');
+        commit("users_request",res.data);
+
+    },
     // Get the user Profile
     async getProfile({
         commit
@@ -74,9 +81,18 @@ const actions = {
         router.push('/login');
         return
     }
+    ,async updateprofile({commit},user){
+        commit('user_profile');
+        axios.put(serverAdress+"/auth/updateProfile/"+user._id,user);
+    }
+
+
 };
 
 const mutations = {
+    users_request(state,users){
+        state.users = users
+    },
     auth_request(state) {
         state.error = null
         state.status = 'loading'

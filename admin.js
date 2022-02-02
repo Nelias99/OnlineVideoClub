@@ -13,4 +13,13 @@ router.delete('/deluser/:userID',async (req, res) => {
         msg: "User is deleted"
     });
 })
+
+router.get('/userlist' , function (req , res) {
+    User.find({}).then(function (users) {
+    res.send(users);
+    });
+   });
+
+
+
 module.exports=router;

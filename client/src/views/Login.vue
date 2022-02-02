@@ -63,7 +63,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err);
+          this.$swal(err);
         });
     }
   }

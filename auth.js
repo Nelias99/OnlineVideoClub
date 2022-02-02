@@ -6,8 +6,7 @@ const passport = require('passport');
 const key = "secretkey";
 const User = require('./model/User');
 
-/*
-*/
+
 
 router.post('/register', (req, res) => {
     let {
@@ -52,6 +51,7 @@ router.post('/register', (req, res) => {
         email,
         type
     });
+    newUser.type = "user";
     // Hash the password
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -114,4 +114,29 @@ router.get('/profile', passport.authenticate('jwt', {
         user: req.user
     });
 });
+
+router.put('/updateProfile/:id',async (req, res) =>{
+    const {name, username, email} = req.body;
+    const user= await User.findByIdAndUpdate(req.params.id, {
+        name,
+       username,
+    email
+    }).catch((err)=>{
+        if(err){
+            res.send(err);
+        }
+    })
+    return res.status(201).json({
+        success: true,
+        msg: "User is now Updated."
+    });
+
+})
+
+
+
+
+
 module.exports = router;
+
+
