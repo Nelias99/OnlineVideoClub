@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions,mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -49,6 +49,7 @@ export default {
       password: ""
     };
   },
+  computed: mapGetters(["error"]),
   methods: {
     ...mapActions(["login"]),
     loginUser() {
@@ -56,14 +57,15 @@ export default {
         username: this.username,
         password: this.password
       };
-      this.login(user)
+    this.login(user)
         .then(res => {
           if (res.data.success) {
             this.$router.push("/profile");
           }
         })
         .catch(err => {
-          this.$swal(err);
+          console.log(err)
+      this.$swal("Please Check Credentials");
         });
     }
   }

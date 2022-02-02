@@ -35,11 +35,15 @@ const actions = {
                 // Set the axios defaults
                 axios.defaults.headers.common['Authorization'] = token;
                 commit('auth_success', token, user);
+        
             }
-            console.log(res)
+           
             return res;
         } catch (err) {
             commit('auth_error', err);
+            
+            return err;
+
         }
     },
     // Register User

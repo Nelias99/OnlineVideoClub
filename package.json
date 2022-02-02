@@ -21,6 +21,7 @@
     "mongoose": "^6.1.8",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "vue-sweetalert2": "^5.0.2"
   }
 }

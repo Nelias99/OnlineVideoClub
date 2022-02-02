@@ -98,9 +98,10 @@ export default {
       this.register(user).then(res => {
         if (res.data.success) {
           this.$router.push("login");
-        }else {
-          this.$swal(res.data.msg);
         }
+      }).catch(err=>{
+        console.log(err);
+        this.$swal("Some Attributes you entered are aleready in use")
       });
     }
   }
